@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import FormComponent from "./FormComponent";
 import ContactComponent from "./ContactComponent";
 import InfiniteScroll from "react-infinite-scroll-component";
+import AlertComponent from "./AlertComponent"
 import "./../App.css";
 
 function AddressBook() {
@@ -9,6 +10,7 @@ function AddressBook() {
   const [contactList, setContactList] = useState([]);
   // State per il contatto selezionato per l'editing
   const [selectedContact, setSelectedContact] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
 
   // State per i dati del form
   const [formData, setFormData] = useState({
@@ -39,6 +41,8 @@ function AddressBook() {
         "Si è verificato un errore durante la richiesta:",
         error.message
       );
+
+      handleShowAlert();
     }
   }
 
@@ -101,6 +105,8 @@ function AddressBook() {
       fetchContacts();
     } catch (error) {
       console.error("Errore durante l'aggiunta del contatto:", error);
+
+      handleShowAlert();
     }
   }
 
@@ -122,6 +128,8 @@ function AddressBook() {
         "Errore durante la richiesta di eliminazione del contatto:",
         error
       );
+
+      handleShowAlert();
     }
   }
 
@@ -170,11 +178,34 @@ function AddressBook() {
         "Errore durante la richiesta di aggiornamento del contatto:",
         error
       );
+
+      handleShowAlert();
     }
+  }
+
+  //Funzione per la gestione dell'alert
+
+  function handleShowAlert() {
+    setShowAlert(true);
+  }
+
+  function handleCloseAlert() {
+    setShowAlert(false);
   }
 
   return (
     <div className="addressBookBody">
+      <div>
+
+        {showAlert && (
+          <AlertComponent
+            message="There was an error with the server, try again later."
+            onClose={() => handleCloseAlert()}
+          />
+        )}
+
+
+      </div>
       <FormComponent
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
@@ -182,7 +213,7 @@ function AddressBook() {
         selectedContact={selectedContact}
       />
 
-      <div style={{ maxHeight: "800px", overflowY: "auto" }}>
+      <div className="contactComponentBody">
         {contactList.map((contact) => (
           <ContactComponent
             key={contact.id}
