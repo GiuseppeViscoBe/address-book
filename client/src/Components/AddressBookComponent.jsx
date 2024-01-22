@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import FormComponent from "./FormComponent";
 import ContactComponent from "./ContactComponent";
-import InfiniteScroll from "react-infinite-scroll-component";
 import AlertComponent from "./AlertComponent"
 import "./../App.css";
 
@@ -31,14 +30,14 @@ function AddressBook() {
       const response = await fetch("api/contact-list");
 
       if (!response.ok) {
-        throw new Error(`Errore durante la richiesta: ${response.statusText}`);
+        throw new Error(`Error fetching from server: ${response.statusText}`);
       }
 
       const data = await response.json();
       setContactList(data);
     } catch (error) {
       console.error(
-        "Si è verificato un errore durante la richiesta:",
+        "Error fetching from server:",
         error.message
       );
 
@@ -104,7 +103,7 @@ function AddressBook() {
       // Aggiorna la lista completa dei contatti dal backend
       fetchContacts();
     } catch (error) {
-      console.error("Errore durante l'aggiunta del contatto:", error);
+      console.error("Error adding contact to server:", error);
 
       handleShowAlert();
     }
@@ -121,11 +120,11 @@ function AddressBook() {
       if (response.ok) {
         fetchContacts();
       } else {
-        console.error("Errore durante l'eliminazione del contatto");
+        console.error("Error deleting contact from server.");
       }
     } catch (error) {
       console.error(
-        "Errore durante la richiesta di eliminazione del contatto:",
+        "Error deleting contact from server:",
         error
       );
 
@@ -171,11 +170,11 @@ function AddressBook() {
         fetchContacts();
         setSelectedContact(null);
       } else {
-        console.error("Errore durante l'aggiornamento del contatto");
+        console.error("Error updating contact.");
       }
     } catch (error) {
       console.error(
-        "Errore durante la richiesta di aggiornamento del contatto:",
+        "Error updating contact:",
         error
       );
 

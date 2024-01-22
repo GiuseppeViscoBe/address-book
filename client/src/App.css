@@ -1,13 +1,16 @@
-/* Aggiungi al tuo file CSS esterno, ad esempio App.css */
+body {
+  background: rgb(213,230,240);
+background: radial-gradient(circle, rgba(213,230,240,1) 53%, rgba(210,217,218,1) 100%);
+}
 .App {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
-.contactComponentBody{
+.contactComponentBody {
   max-height: 800px;
   overflow-y: auto;
   width: 400px;
@@ -15,27 +18,29 @@
 
 .addressBookBody {
   display: flex;
-  justify-content: space-evenly; 
-  padding: 20px; 
+  justify-content: space-evenly;
+  padding: 20px;
   height: 85vh;
 }
 form {
   max-width: 400px;
   margin: auto;
   padding: 20px;
-  background-color: #f4f4f4;
+  background-color: #d8e7eb;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .contact {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1.5px solid black;
   max-width: 400px;
   margin: auto;
   padding: 20px;
-  background-color: #f4f4f4;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #d8e7eb;
+  border-radius: 25px;
   margin-bottom: 30px;
+  margin-right: 20px;
 }
 
 label {
@@ -55,7 +60,7 @@ input {
 }
 
 button {
-  background-color: #4caf50;
+  background-color: #495057;
   color: white;
   padding: 10px 15px;
   border: none;
@@ -65,16 +70,13 @@ button {
 }
 
 button.edit {
-  background-color: #614caf; 
+  background-color: #adb5bd;
 }
 
 button.delete {
-  background-color: rgb(228, 16, 16);
+  background-color: black;
   margin-right: 15px;
-}
-
-button:hover {
-  background-color: #45a049;
+  margin-left: 20px;
 }
 
 .custom-alert-overlay {
@@ -97,7 +99,7 @@ button:hover {
 }
 
 .custom-alert button {
-  background: #007bff;
+  background: rgb(189, 59, 59);
   color: white;
   padding: 10px;
   border: none;
@@ -106,3 +108,21 @@ button:hover {
   margin-top: 10px;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+
+::-webkit-scrollbar-track {
+  background: #f1f1f12c;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: #8c8d8d;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
