@@ -33,7 +33,7 @@ This web application serves as an address book, allowing users to manage their c
    cd server
    npm install
 
-4. Install dependencies for the cliend
+4. Install dependencies for the client
    ```bash
    cd ../client
    npm install
