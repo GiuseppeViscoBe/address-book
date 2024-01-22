@@ -26,18 +26,18 @@ form {
   max-width: 400px;
   margin: auto;
   padding: 20px;
-  background-color: #d8e7eb;
+  background-color: #E1ECF0;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .contact {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border: 1.5px solid black;
+  border: 1px solid #003A64;
   max-width: 400px;
   margin: auto;
   padding: 20px;
-  background-color: #d8e7eb;
+  background-color: #E1ECF0;
   border-radius: 25px;
   margin-bottom: 30px;
   margin-right: 20px;
@@ -57,10 +57,11 @@ input {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+  background-color: rgb(212, 214, 216);
 }
 
 button {
-  background-color: #495057;
+  background-color: #003A64;
   color: white;
   padding: 10px 15px;
   border: none;
