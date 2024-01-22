@@ -111,7 +111,7 @@ function AddressBook() {
     }
   }
 
-  //Modifica Contattokdshjsfidhgsfhgoihfogdi
+  //Modifica Contatto
 
   //Ogni volta che seleziono un contatto, popolo il form con i suoi dati per modificarlo
   useEffect(() => {
