@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import FormComponent from "./FormComponent";
 import ContactComponent from "./ContactComponent";
+import InfiniteScroll from "react-infinite-scroll-component";
+import "./../App.css";
 
 function AddressBook() {
   // State per la lista dei contatti
@@ -23,9 +25,21 @@ function AddressBook() {
   }, []);
 
   async function fetchContacts() {
-    const response = await fetch("api/contact-list");
-    const data = await response.json();
-    setContactList(data);
+    try {
+      const response = await fetch("api/contact-list");
+
+      if (!response.ok) {
+        throw new Error(`Errore durante la richiesta: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      setContactList(data);
+    } catch (error) {
+      console.error(
+        "Si è verificato un errore durante la richiesta:",
+        error.message
+      );
+    }
   }
 
   // Funzione per gestire la sottomissione del form
@@ -160,7 +174,7 @@ function AddressBook() {
   }
 
   return (
-    <div className="App">
+    <div className="addressBookBody">
       <FormComponent
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
@@ -168,18 +182,22 @@ function AddressBook() {
         selectedContact={selectedContact}
       />
 
-      {contactList.map((contact) => (
-        <ContactComponent
-          key={contact.id}
-          name={contact.name}
-          surName={contact.surName}
-          email={contact.email}
-          phoneNumber={contact.phoneNumber}
-          isSelected={selectedContact != null && selectedContact.id == contact.id}
-          selectEdit={() => selectEdit(contact.id)}
-          handleDelete={() => handleDelete(contact.id)}
-        />
-      ))}
+      <div style={{ maxHeight: "800px", overflowY: "auto" }}>
+        {contactList.map((contact) => (
+          <ContactComponent
+            key={contact.id}
+            name={contact.name}
+            surName={contact.surName}
+            email={contact.email}
+            phoneNumber={contact.phoneNumber}
+            isSelected={
+              selectedContact != null && selectedContact.id === contact.id
+            }
+            selectEdit={() => selectEdit(contact.id)}
+            handleDelete={() => handleDelete(contact.id)}
+          />
+        ))}
+      </div>
     </div>
   );
 }

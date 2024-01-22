@@ -1,15 +1,16 @@
 import { useState } from "react";
+import "./../App.css";
 
 function Form({ handleInputChange, handleSubmit, formData,selectedContact }) {
   return (
     <div className="App">
       <form onSubmit={handleSubmit}>
         <label>
-          Nome
+          Name:
           <input
             type="text"
             name="name"
-            placeholder="add item..."
+            placeholder="Insert name..."
             value={formData.name}
             onChange={handleInputChange}
             required
@@ -17,11 +18,11 @@ function Form({ handleInputChange, handleSubmit, formData,selectedContact }) {
         </label>
         <br />
         <label>
-          Cognome:
+          Surname:
           <input
             type="text"
             name="surName"
-            placeholder="Inserisci il cognome..."
+            placeholder="Insert surname..."
             value={formData.surName}
             onChange={handleInputChange}
             required
@@ -34,7 +35,7 @@ function Form({ handleInputChange, handleSubmit, formData,selectedContact }) {
           <input
             type="text"
             name="email"
-            placeholder="Inserisci l'email..."
+            placeholder="Insert email..."
             value={formData.email}
             onChange={handleInputChange}
           />
@@ -42,11 +43,11 @@ function Form({ handleInputChange, handleSubmit, formData,selectedContact }) {
         <br />
 
         <label>
-          Numero di Telefono:
+          Phone Number:
           <input
             type="text"
             name="phoneNumber"
-            placeholder="Inserisci il numero di telefono..."
+            placeholder="Insert phone number..."
             value={formData.phoneNumber}
             onChange={handleInputChange}
             required
