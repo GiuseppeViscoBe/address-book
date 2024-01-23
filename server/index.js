@@ -36,6 +36,8 @@ app.get("/api/contact-list", (req, res) => {
 app.post("/api/add-contact", (req, res) => {
   const newContact = { ...req.body, id: uuidv4() };
   contacts.push(newContact);
+
+  console.log(contacts);
   res.json(newContact);
 });
 
@@ -43,7 +45,8 @@ app.delete("/api/delete-contact/:id", (req, res) => {
   const contactId = req.params.id;
 
   contacts = contacts.filter((contact) => contact.id !== contactId);
-
+  
+  console.log(contacts);
   res.json({ success: true, message: "Contact succesfully deleted" });
 });
 
