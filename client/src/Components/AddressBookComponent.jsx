@@ -27,14 +27,16 @@ function AddressBook() {
 
   async function fetchContacts() {
     try {
-      const response = await fetch("api/contact-list");
+      const response = await fetch("http://localhost:3001/api/contacts");
 
       if (!response.ok) {
         throw new Error(`Error fetching from server: ${response.statusText}`);
       }
 
       const data = await response.json();
-      setContactList(data);
+
+      console.log("Response from server:", data.contacts);
+      setContactList(data.contacts);
     } catch (error) {
       console.error(
         "Error fetching from server:",
@@ -51,7 +53,7 @@ function AddressBook() {
 
     // Se ho un contatto selezionato lo modifico
     if (selectedContact) {
-      editContact(formData, selectedContact.id);
+      editContact(formData, selectedContact._id);
     } else {
       // Aggiungo un nuovo contatto
       addContact(formData);
@@ -79,7 +81,7 @@ function AddressBook() {
 
   async function addContact(newContact) {
     try {
-      const response = await fetch("api/add-contact", {
+      const response = await fetch("http://localhost:3001/api/contacts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -113,7 +115,7 @@ function AddressBook() {
 
   async function handleDelete(contactId) {
     try {
-      const response = await fetch(`/api/delete-contact/${contactId}`, {
+      const response = await fetch(`http://localhost:3001/api/contacts/${contactId}`, {
         method: "DELETE",
       });
 
@@ -151,14 +153,15 @@ function AddressBook() {
 
   // Funzione per selezionare un contatto per l'editing
   function selectEdit(contactId) {
-    setSelectedContact(contactList.find((contact) => contact.id === contactId));
+    setSelectedContact(contactList.find((contact) => contact._id === contactId));
   }
 
   //Funzione che gestisce la modifica
   async function editContact(editedContact, contactId) {
     const editRequest = { ...editedContact, id: contactId };
     try {
-      const response = await fetch(`/api/edit-contact/`, {
+      console.log("id del contatto: " + contactId)
+      const response = await fetch(`http://localhost:3001/api/contacts/${contactId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -215,16 +218,16 @@ function AddressBook() {
       <div className="contactComponentBody">
         {contactList.map((contact) => (
           <ContactComponent
-            key={contact.id}
+            key={contact._id}
             name={contact.name}
             surName={contact.surName}
             email={contact.email}
             phoneNumber={contact.phoneNumber}
             isSelected={
-              selectedContact != null && selectedContact.id === contact.id
+              selectedContact != null && selectedContact.id === contact._id
             }
-            selectEdit={() => selectEdit(contact.id)}
-            handleDelete={() => handleDelete(contact.id)}
+            selectEdit={() => selectEdit(contact._id)}
+            handleDelete={() => handleDelete(contact._id)}
           />
         ))}
       </div>
